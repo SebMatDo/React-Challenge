@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
-import { Box, Container, Grid, IconButton } from '@mui/material'
+import { Container, Grid, IconButton } from '@mui/material'
 import styled from '@emotion/styled'
 
 interface FavoriteComics {
@@ -22,9 +21,6 @@ const ComicTitle = styled.div`
 
 function Favorites (props: FavoritesProps) {
   const { favoritesComics, onDeleteFavourite } = props
-  React.useEffect(() => {
-    console.log(favoritesComics)
-  }, [favoritesComics])
 
   return (
     <div style={{ marginBottom: '64px' }}>

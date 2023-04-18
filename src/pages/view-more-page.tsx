@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import * as React from 'react'
+import React from 'react'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
 import Dialog from '@mui/material/Dialog'
@@ -187,6 +186,7 @@ export default function ViewMore (props: ViewMoreProps) {
                 >
                   <ArrowBackIosNewIcon />
                 </Button>
+              {(!loading &&
                 <img
                   src={`${data?.thumbnail?.path}.${data?.thumbnail?.extension}`}
                   alt={'Ilustration of the comic'}
@@ -194,6 +194,16 @@ export default function ViewMore (props: ViewMoreProps) {
                   height={'300px'}
                   style={{ padding: '0px 16px 0px 16px' }}
                 />
+              )}
+              {(loading &&
+                <img
+                  src={require('../icons/loading.gif')}
+                  alt={'loading gif'}
+                  width={'200'}
+                  height={'200px'}
+                  style={{ padding: '0px 16px 0px 16px', marginBottom: '50px', marginTop: '50px' }}
+                />
+              )}
                 <Button
                   onClick={changeItemForward}
                   sx={{

@@ -3,7 +3,6 @@ import {
   CssBaseline,
   AppBar,
   Toolbar,
-  IconButton,
   alpha,
   InputBase,
   styled,
@@ -13,6 +12,7 @@ import { ReactComponent as MarvelLogo } from '../icons/marvelLogo.svg'
 import SearchIcon from '@mui/icons-material/Search'
 import { ThemeProvider } from '@emotion/react'
 import { grey } from '@mui/material/colors'
+import { NavLink } from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -67,13 +67,12 @@ function Header (props: headerProps) {
       <ThemeProvider theme={theme}>
         <AppBar component="nav" color="primary">
           <Toolbar>
-            <IconButton
-              size="small"
-              edge={false}
-              sx={{ width: '120px', height: '70px' }}
+            <NavLink
+              style={{ width: '120px', height: '70px' }}
+              to={'/'}
             >
               <MarvelLogo width="100%" height="100%" />
-            </IconButton>
+            </NavLink>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />

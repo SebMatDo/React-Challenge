@@ -83,7 +83,11 @@ export default function ComicModal (props: ComicModalProps) {
             if (response.status === 200) {
               setData(response.data.data.results[0])
               if (response.data.data.results[0].prices[0].price === 0) {
-                setPrice(response.data.data.results[0].prices[1].price)
+                if (response.data.data.results[0].prices.length > 1) {
+                  setPrice(response.data.data.results[0].prices[1].price)
+                } else {
+                  setPrice(0)
+                }
               } else {
                 setPrice(response.data.data.results[0].prices[0].price)
               }
@@ -105,7 +109,6 @@ export default function ComicModal (props: ComicModalProps) {
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        {!loading && (
           <>
             <DialogContent dividers>
               <CloseButton onClick={onClose} style={{ display: '' }}>
@@ -117,32 +120,41 @@ export default function ComicModal (props: ComicModalProps) {
                 />
               </CloseButton>
               <Grid container direction="row">
+              {(!loading &&
                 <Grid item xs={4}>
                   <img
                     src={`${data?.thumbnail?.path}.${data?.thumbnail?.extension}`}
                     alt={'Ilustration of the comic'}
                     width={'100%'}
                     height={'100%'}
-                    style={{ paddingRight: '16px' }}
-                  />
+                    style={{ paddingRight: '16px' }} />
                 </Grid>
+                )}
+                {(loading &&
+                <img
+                  src={require('../icons/loading.gif')}
+                  alt={'loading gif'}
+                  width={'200'}
+                  height={'200px'}
+                  style={{ padding: '0px 16px 0px 16px', marginBottom: '20px', marginTop: '20px' }}
+                />
+              )}
                 <Grid item xs={7.5} container direction="column">
-                  <div
-                    style={{
-                      margin: 0,
-                      padding: '0 0 10px 0',
-                      width: '100%',
-                      fontSize: '22px',
-                      fontWeight: '600'
-                    }}
-                  >
-                    {' '}
-                    {comicInformation.name}{' '}
-                  </div>
-                  <Typography gutterBottom variant="body2">
-                    {data?.description}
-                  </Typography>
-                </Grid>
+                    <div
+                      style={{
+                        margin: 0,
+                        padding: '0 0 10px 0',
+                        width: '100%',
+                        fontSize: '22px',
+                        fontWeight: '600'
+                      }}
+                    >
+                      {comicInformation.name}
+                    </div>
+                    <Typography gutterBottom variant="body2">
+                      {data?.description}
+                    </Typography>
+                  </Grid>
               </Grid>
             </DialogContent>
             <Grid container direction="row" height="56px">
@@ -219,7 +231,6 @@ export default function ComicModal (props: ComicModalProps) {
               </Button>
             </Grid>
           </>
-        )}
       </Dialog>
     </div>
   )
